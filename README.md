@@ -27,7 +27,6 @@ Easy Arduino TX. Monitor CO2 and PM 2.5, display on 7-segment displays, and tran
 €   1,00 100 µF 10V el. cap
 €  13,00 MEANWELL GS15E-11P1J PSU
 € 178,00
-
 </pre>  
 
 ### Useful links
