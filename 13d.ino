@@ -23,15 +23,15 @@
 #define ESP32_RESET 3 // AirLift ESP32 reset pin
 #define SPIWIFI_ACK 2 // AirLift ESP32 ready pin
 #define ESP32_GPIO0 -1 // AirLift ESP32 pin not used
-#define WLAN_SSID "Lagom" // WLAN router SSID
-#define WLAN_PASS "63948100905083530879" // WLAN router key
-//#define WLAN_SSID "Bra" // Smartphone hotspot SSID
-//#define WLAN_PASS "dcb62d5396ad" // Smartphone hotspot key
+#define WLAN_SSID "#" // WLAN router SSID
+#define WLAN_PASS "#" // WLAN router key
+//#define WLAN_SSID "#" // Smartphone hotspot SSID
+//#define WLAN_PASS "#" // Smartphone hotspot key
 // AIO
 #define AIO_SERVER "io.adafruit.com" // MQTT broker/server host
 #define AIO_SERVERPORT 8883 // Secure port, 1883 insecure port
-#define AIO_USERNAME "LagomBra" // AIO user name
-#define AIO_KEY "aio_OxVh64x79j022uOLdqt7bUWHGkZA" // AIO key
+#define AIO_USERNAME "#" // AIO user name
+#define AIO_KEY "#" // AIO key
 
 const int intervalSPS30PM25 = 5000; // MQTT broker publish interval
 const int intervalSCD30CO2 = 10000; // MQTT broker publish interval
@@ -103,7 +103,9 @@ void loop()
     timeSPS30PM25 = millis(); // Update the timestamp for the next loop() iteration
 
     readSPS30(); // And call to function that reads a value from the sensor
-
+    
+    SPS30PM25feed.publish((float)SPS30PM25); // Publish to AIO feed
+    
     // Indicate that data will be published
     triggerFlash = true;
   }
@@ -113,7 +115,9 @@ void loop()
     timeSCD30CO2 = millis();
 
     readSCD30();
-
+    
+    SCD30CO2feed.publish((float)SCD30CO2);
+    
     triggerFlash = true;
   }
 
@@ -200,20 +204,14 @@ void readSPS30() // Don't call this function more often than every second (compa
   sps30_read_measurement(&m);
   SPS30PM25 = m.mc_2p5; // Read output into a variable. Other PM and NC values also possible
 
-  SPS30PM25feed.publish((float)SPS30PM25);
-
   displaySPS30.print(SPS30PM25); displaySPS30.writeDisplay(); // Only for display usage
-  //Serial.print("PM 2.5: "); Serial.println(SPS30PM25); Serial.println(); // Only for debugging
 }
 
 void readSCD30() // Don't call this function more often than every five seconds (company documentation)
 {
   SCD30CO2 = SCD30CO2Sensor.getCO2(); // Read output into a variable. Humidity and temperature also possible
 
-  SCD30CO2feed.publish((float)SCD30CO2);
-
   displaySCD30.print(SCD30CO2); displaySCD30.writeDisplay(); // Only for display usage
-  //Serial.print("CO2: "); Serial.println(SCD30CO2); Serial.println(); // Only for debugging
 }
 
 void flash(int timeon, int timeoff, byte flashes, byte g, byte r, byte b)
