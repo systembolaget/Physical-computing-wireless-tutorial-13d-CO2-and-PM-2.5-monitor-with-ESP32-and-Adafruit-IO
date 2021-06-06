@@ -102,12 +102,11 @@ void loop()
   {
     timeSPS30PM25 = millis(); // Update the timestamp for the next loop() iteration
 
-    readSPS30(); // And call to function that reads a value from the sensor
+    readSPS30(); // And call the function that reads a value from the sensor
     
-    SPS30PM25feed.publish((float)SPS30PM25); // Publish to AIO feed
+    SPS30PM25feed.publish((float)SPS30PM25); // Then publish it to the AIO feed
     
-    // Indicate that data will be published
-    triggerFlash = true;
+    triggerFlash = true; // And finally indicate that data will be published
   }
 
   if (millis() - timeSCD30CO2 >= intervalSCD30CO2)
@@ -153,7 +152,7 @@ void connectToWLAN()
   } while (status != WL_CONNECTED);
 
   // Indicate that the WiFi connection is active
-  WiFi.setLEDs(192, 255, 0); // Yellow
+  WiFi.setLEDs(176, 255, 0); // Yellow
 }
 
 void connectToMQTT()
