@@ -1,4 +1,4 @@
-# CO2 and PM 2.5 monitor with ESP32 and Adafruit IO
+# Physical computing wireless tutorial - CO2 and PM 2.5 monitor with ESP32 and Adafruit IO
 
 Easy Arduino TX. Monitor CO2 and PM 2.5, display on 7-segment displays, and transmit to Adafruit IO
 
