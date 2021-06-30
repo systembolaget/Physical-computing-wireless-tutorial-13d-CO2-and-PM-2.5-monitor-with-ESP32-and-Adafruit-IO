@@ -2,9 +2,11 @@
 
 Easy Arduino TX. Monitor CO2 and PM 2.5 levels, display on 7-segment displays, and transmit to Adafruit IO
 
-### Result
+### Setup
 
-![](Assets/13d%20result.jpg)
+You can click the image to play the associated YouTube video
+
+[![Alt text](Assets/13d%20result.jpg)](https://www.youtube.com/watch?v=eIEShsB4q_s)
 
 ### Schematic
 
